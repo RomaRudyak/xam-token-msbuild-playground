@@ -183,10 +183,10 @@
 
     <Import Project="..\packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets" Condition="Exists('..\packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets')" />
 
-    <Target BeforeTargets="Build" Name="TransformManifest">
+    <Target BeforeTargets="_SetLatestTargetFrameworkVersion" Name="TransformManifest">
       <PropertyGroup>
         <AndroidManifestSource>Properties\AndroidManifest.xml</AndroidManifestSource>
-        <AndroidManifest>$(ProjectDir)$(IntermediateOutputPath)\AndroidManifest1.xml</AndroidManifest>
+        <AndroidManifest>Properties\AndroidManifest.tokens.xml</AndroidManifest>
       </PropertyGroup>
 
       <Message Text="$(AndroidManifest)" />
@@ -198,7 +198,7 @@
         </ItemGroup>
             
         <TemplateFile Template="$(AndroidManifestSource)" 
-                    OutputFilename="$(AndroidManifest)" 
+                    OutputFilename="AndroidManifest.tokens.xml" 
                     Tokens="@(Tokens)" />
     </Target>
     
